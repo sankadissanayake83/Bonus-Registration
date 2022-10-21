@@ -5,6 +5,8 @@ table 50140 "MNB Bonus Header"
 {
     Caption = 'Bonus';
     DataClassification = ToBeClassified;
+    DrillDownPageId = "MNB Bonus List";
+    LookupPageId = "MNB Bonus List";
 
     fields
     {
@@ -27,6 +29,11 @@ table 50140 "MNB Bonus Header"
         field(4; "Ending Date"; Date)
         {
             Caption = 'Ending Date';
+            DataClassification = ToBeClassified;
+        }
+        field(5; "Status"; Enum "MNB Bonus Header Status")
+        {
+            Caption = 'Status';
             DataClassification = ToBeClassified;
         }
     }
