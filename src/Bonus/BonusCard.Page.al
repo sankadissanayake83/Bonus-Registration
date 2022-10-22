@@ -42,9 +42,18 @@ page 50142 "MNB Bonus Card"
                 }
 
             }
-        }
-    }
 
+            part(Lines; "MNB Bonus Subform")
+            {
+                ApplicationArea = All;
+                SubPageLink = "Document No." = field("No.");
+                Caption = 'Lines';
+            }
+        }
+
+
+
+    }
     actions
     {
         area(Navigation)
@@ -60,7 +69,4 @@ page 50142 "MNB Bonus Card"
             }
         }
     }
-
-    var
-        myInt: Integer;
 }
