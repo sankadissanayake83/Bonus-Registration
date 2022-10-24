@@ -14,6 +14,10 @@ table 50140 "MNB Bonus Header"
         {
             Caption = 'No.';
             DataClassification = ToBeClassified;
+            trigger OnValidate()
+            begin
+                TestStatus();
+            end;
         }
         field(2; "Customer No."; Code[20])
         {
@@ -25,11 +29,21 @@ table 50140 "MNB Bonus Header"
         {
             Caption = 'Starting Date';
             DataClassification = ToBeClassified;
+            trigger OnValidate()
+            begin
+                if "Ending Date" < "Starting Date" then
+                    "Ending Date" := "Starting Date";
+            end;
         }
         field(4; "Ending Date"; Date)
         {
             Caption = 'Ending Date';
             DataClassification = ToBeClassified;
+            trigger OnValidate()
+            begin
+                if "Ending Date" < "Starting Date" then
+                    "Starting Date" := "Ending Date";
+            end;
         }
         field(5; "Status"; Enum "MNB Bonus Header Status")
         {
@@ -44,4 +58,18 @@ table 50140 "MNB Bonus Header"
             Clustered = true;
         }
     }
+
+    trigger OnDelete()
+    begin
+        TestStatus();
+    end;
+
+    var
+        StatusCannotBeReleasedErr: Label 'Status Cannot Be %1', Comment = '%1 - Status field value';
+
+    local procedure TestStatus()
+    begin
+        if Status = Status::Released then
+            Error(StatusCannotBeReleasedErr, Status);
+    end;
 }

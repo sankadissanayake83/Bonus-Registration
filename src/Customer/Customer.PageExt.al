@@ -31,6 +31,4 @@ pageextension 50140 "MNB Customer List" extends "Customer List"
         }
     }
 
-    var
-        myInt: Integer;
 }

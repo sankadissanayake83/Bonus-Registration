@@ -13,4 +13,22 @@ tableextension 50140 "MNB Customer" extends Customer
             Editable = false;
         }
     }
+
+    trigger OnBeforeDelete()
+    begin
+        TestIfBonusExists();
+    end;
+
+    var
+        AtLeaseOneBonusForOneCustomerExistsErr: Label 'At Least One Bonuse for Customer %1 Exists.', Comment = '%1 - Custmer Name';
+
+    local procedure TestIfBonusExists()
+    var
+        BonusHeader: Record "MNB Bonus Header";
+    begin
+        BonusHeader.SetRange("Customer No.", Rec."No.");
+        if not BonusHeader.IsEmpty then
+            error(AtLeaseOneBonusForOneCustomerExistsErr, Rec.Name);
+    end;
+
 }
