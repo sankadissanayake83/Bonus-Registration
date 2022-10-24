@@ -41,5 +41,36 @@ table 50141 "MNB Bonus Line"
             Clustered = true;
         }
     }
+    trigger OnDelete()
+    begin
+        TestStatus()
+    end;
+
+    trigger OnInsert()
+    begin
+        TestStatus();
+    end;
+
+    trigger OnModify()
+    begin
+        TestStatus();
+    end;
+
+    trigger OnRename()
+    begin
+        TestStatus();
+    end;
+
+    var
+        StatusCannotBeReleasedErr: Label 'Status Cannot Be %1', Comment = '%1 - Status field value';
+
+    local procedure TestStatus()
+    var
+        BonusHeader: Record "MNB Bonus Header";
+    begin
+        if BonusHeader.Get(Rec."Document No.") then
+            if BonusHeader.Status = BonusHeader.Status::Released then
+                Error(StatusCannotBeReleasedErr, BonusHeader.Status);
+    end;
 
 }
