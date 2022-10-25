@@ -62,6 +62,7 @@ table 50140 "MNB Bonus Header"
     trigger OnDelete()
     begin
         TestStatus();
+        DeleteLines();
     end;
 
     var
@@ -71,5 +72,14 @@ table 50140 "MNB Bonus Header"
     begin
         if Status = Status::Released then
             Error(StatusCannotBeReleasedErr, Status);
+    end;
+
+    var
+        BonusLine: Record "MNB Bonus Line";
+
+    local procedure DeleteLines()
+    begin
+        BonusLine.SetRange("Document No.", "No.");
+        BonusLine.DeleteAll(true);
     end;
 }
