@@ -8,5 +8,6 @@ permissionset 50140 "BonusReg.Permission"
     Permissions =
         table "MNB Bonus Header" = X,
         tabledata "MNB Bonus Header" = RMID,
-        tabledata "MNB Bonus Line" = RMID;
+        tabledata "MNB Bonus Line" = RMID,
+        tabledata "MNB Bonus Entry" = RMID;
 }
