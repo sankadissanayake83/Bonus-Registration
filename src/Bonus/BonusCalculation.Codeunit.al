@@ -59,6 +59,5 @@ codeunit 50140 "MNB Bonus Calculation"
         BonusEntry."Posting Date" := SalesInvLine."Posting Date";
         BonusEntry."Bonus Amount" := SalesInvLine."Line Amount" * (BonusLine."Bonus Perc." / 100);
         BonusEntry.Insert();
-
     end;
 }
