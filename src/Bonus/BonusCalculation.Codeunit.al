@@ -60,4 +60,14 @@ codeunit 50140 "MNB Bonus Calculation"
         BonusEntry."Bonus Amount" := SalesInvLine."Line Amount" * (BonusLine."Bonus Perc." / 100);
         BonusEntry.Insert();
     end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnBeforeInsertBonusEntry(BonusLine: Record "MNB Bonus Line"; var SalesInvLine: Record "Sales Invoice Line")
+    begin
+    end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnAfterInsertBonusEntry(BonusLine: Record "MNB Bonus Line"; var SalesInvLine: Record "Sales Invoice Line")
+    begin
+    end;
 }
